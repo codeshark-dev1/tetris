@@ -9,10 +9,10 @@ class TetrisGrid
 
     Vector2 gridPosition;
 
-    public int Width { get { return 20; } }
+    public int Width { get { return 10; } }
     public int Height { get { return 20; } }
     public int cellWidth = 40, cellHeight = 40, screenWidth = 800, screenHeight = 800;
-    public Color[,] cells = new Color[20, 20];
+    public Color[,] cells = new Color[10, 20];
 
     public List<TetrisBlock> currentBlocks = new List<TetrisBlock>();
 
@@ -25,12 +25,12 @@ class TetrisGrid
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        for (int i = 0; i < Height; i++) 
+        for (int i = 0; i < Height; i++)
         {
-            for (int j = 0; j < Width; j++) 
+            for (int j = 0; j < Width; j++)
             {
                 spriteBatch.Draw(emptyCell, new Rectangle(j * cellWidth, i * cellHeight, cellWidth, cellWidth), Color.White); //background
-                spriteBatch.Draw(emptyCell, new Rectangle(j * cellWidth, i * cellHeight, cellWidth, cellWidth), cells[j,i]);
+                spriteBatch.Draw(emptyCell, new Rectangle(j * cellWidth, i * cellHeight, cellWidth, cellWidth), cells[j, i]);
             }
         }
     }
@@ -41,9 +41,8 @@ class TetrisGrid
         {
             for (int j = 0; j < Width; j++)
             {
-                cells[j,i] = Color.White;
+                cells[j, i] = Color.White;
             }
         }
     }
 }
-

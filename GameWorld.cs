@@ -45,6 +45,30 @@ class GameWorld
         blockSpawner.Update(gameTime);
         currentBlock = blockSpawner.GetNewBlock();
 
+        if (currentMoveDelay <= 0 || keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentBlock != null)
+        {
+            if (!CheckBlockCollision(currentXOffset, currentYOffset + 1))
+            {
+                currentYOffset++;
+                currentMoveDelay = moveDelay;
+            }
+            else
+            {
+                LockBlock();
+                blockSpawner.SpawnBlock();
+                currentYOffset = 0;
+            }
+        }
+
+        if (keyboardState.IsKeyDown(Keys.R) && currentBlock != null)
+        {
+            bool[,] newShape = currentBlock.GetNextRotation();
+            if (!CheckBlockCollision(currentXOffset, currentYOffset, newShape))
+            {
+                currentBlock.Rotate();
+            }
+        }
+
         if (currentBlock != null)
         {
             currentBlock.Update(gameTime);
@@ -57,27 +81,20 @@ class GameWorld
             currentXOffset = 0;
         }
 
-        if (currentYOffset + 1 > 18/* || BlockCollides()*/)
+        if ((keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && currentBlock != null)
         {
-            LockBlock();
-            blockSpawner.SpawnBlock();
-            currentYOffset = 0;
+            if (!CheckBlockCollision(currentXOffset - 1, currentYOffset))
+            {
+                currentXOffset--;
+            }
         }
 
-        if ((currentMoveDelay <= 0 || keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S)) && currentBlock != null && currentYOffset + 1 <= 18)
+        if ((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && currentBlock != null)
         {
-            currentMoveDelay = moveDelay;
-            currentYOffset++;
-        }
-
-        if ((keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && currentXOffset - 1 >= 0 && currentBlock != null)
-        {
-            currentXOffset--;
-        }
-
-        if ((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && currentXOffset + 1 <= 17 && currentBlock != null)
-        {
-            currentXOffset++;
+            if (!CheckBlockCollision(currentXOffset + 1, currentYOffset))
+            {
+                currentXOffset++;
+            }
         }
     }
 
@@ -112,6 +129,35 @@ class GameWorld
         }
     }
 
+    private bool CheckBlockCollision(int xOffset, int yOffset, bool[,] blockShape = null)
+    {
+        blockShape = blockShape ?? currentBlock.shape;
+
+        for (int i = 0; i < blockShape.GetLength(0); i++)
+        {
+            for (int j = 0; j < blockShape.GetLength(1); j++)
+            {
+                if (blockShape[i, j])
+                {
+                    int gridX = xOffset + j;
+                    int gridY = yOffset + i;
+
+                    if (gridX < 0 || gridX >= grid.Width || gridY >= grid.Height)
+                    {
+                        return true; //collides with grid boundaries
+                    }
+
+                    if (gridY >= 0 && grid.cells[gridX, gridY] != Color.White)
+                    {
+                        return true; //overlap with another block
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     private void LockBlock()
     {
         for (int i = 0; i < currentBlock.shape.GetLength(0); i++)
@@ -120,12 +166,20 @@ class GameWorld
             {
                 if (currentBlock.shape[i, j])
                 {
-                    grid.cells[currentXOffset + i, currentYOffset + j] = currentBlock.color;
+                    int gridX = currentXOffset + j;
+                    int gridY = currentYOffset + i - 1;
+
+                    if (gridX >= 0 && gridX < grid.Width && gridY < grid.Height)
+                    {
+                        grid.cells[gridX, gridY] = currentBlock.color;
+                    }
                 }
             }
         }
+
         currentBlock = null;
     }
+
     public void Reset()
     {
 
