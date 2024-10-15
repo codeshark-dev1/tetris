@@ -21,7 +21,7 @@ class GameWorld
     private BlockSpawner blockSpawner;
     private TetrisBlock currentBlock;
     private int currentXOffset = 0, currentYOffset = 0;
-    private float moveDelay = 1, currentMoveDelay;
+    private float moveDelayY = 1f, currentMoveDelayY, moveDelayX = 0.1f, currentMoveDelayX;
 
     public GameWorld()
     {
@@ -45,12 +45,12 @@ class GameWorld
         blockSpawner.Update(gameTime);
         currentBlock = blockSpawner.GetNewBlock();
 
-        if (currentMoveDelay <= 0 || keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentBlock != null)
+        if (currentMoveDelayY <= 0 || (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentMoveDelayY * 0.8f <= 0) && currentBlock != null)
         {
             if (!CheckBlockCollision(currentXOffset, currentYOffset + 1))
             {
                 currentYOffset++;
-                currentMoveDelay = moveDelay;
+                currentMoveDelayY = moveDelayY;
             }
             else
             {
@@ -73,26 +73,30 @@ class GameWorld
         {
             currentBlock.Update(gameTime);
 
-            currentMoveDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            currentMoveDelayY -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            currentMoveDelayX -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         else
         {
-            currentMoveDelay = moveDelay;
+            currentMoveDelayY = moveDelayY;
+            currentMoveDelayX = moveDelayX;
             currentXOffset = 0;
         }
 
-        if ((keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && currentBlock != null)
+        if ((keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && currentMoveDelayX <= 0 && currentBlock != null)
         {
             if (!CheckBlockCollision(currentXOffset - 1, currentYOffset))
             {
+                currentMoveDelayX = moveDelayX;
                 currentXOffset--;
             }
         }
 
-        if ((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && currentBlock != null)
+        if ((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && currentMoveDelayX <= 0 && currentBlock != null)
         {
             if (!CheckBlockCollision(currentXOffset + 1, currentYOffset))
             {
+                currentMoveDelayX = moveDelayX;
                 currentXOffset++;
             }
         }
@@ -167,7 +171,7 @@ class GameWorld
                 if (currentBlock.shape[i, j])
                 {
                     int gridX = currentXOffset + j;
-                    int gridY = currentYOffset + i - 1;
+                    int gridY = currentYOffset + i;
 
                     if (gridX >= 0 && gridX < grid.Width && gridY < grid.Height)
                     {

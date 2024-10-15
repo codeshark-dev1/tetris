@@ -25,11 +25,11 @@ class TetrisGrid
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        CheckRow();
         for (int i = 0; i < Height; i++)
         {
             for (int j = 0; j < Width; j++)
             {
-                spriteBatch.Draw(emptyCell, new Rectangle(j * cellWidth, i * cellHeight, cellWidth, cellWidth), Color.White); //background
                 spriteBatch.Draw(emptyCell, new Rectangle(j * cellWidth, i * cellHeight, cellWidth, cellWidth), cells[j, i]);
             }
         }
@@ -42,6 +42,30 @@ class TetrisGrid
             for (int j = 0; j < Width; j++)
             {
                 cells[j, i] = Color.White;
+            }
+        }
+    }
+
+    public void CheckRow()
+    {
+        for (int i = 0; i < Height; i++)
+        {
+            bool rowIsFull = true;
+            for (int j = 0; j < Width; j++)
+            {
+                if (cells[j, i] == Color.White)
+                {
+                    rowIsFull = false;
+                }
+            }
+
+            if (rowIsFull)
+            {
+                //add score
+                for (int j = 0; j < Width; j++)
+                {
+                    cells[j,i] = Color.White;
+                }
             }
         }
     }

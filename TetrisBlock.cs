@@ -180,7 +180,7 @@ namespace TetrisTemplate
 
         public Color color;
 
-        private float rotationDelay = 0.2f;
+        private float rotationDelay = 0.25f;
         private float currentRotationDelay = 0f;
 
         public TetrisBlock(string blockType)
@@ -235,7 +235,6 @@ namespace TetrisTemplate
 
             currentRotationDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-
         public bool[,] GetNextRotation()
         {
             if (currentShape == "O")
