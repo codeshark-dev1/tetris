@@ -25,7 +25,6 @@ namespace TetrisTemplate
         {
             var rand = new Random();
             string newShape = possibleShapes[rand.Next(possibleShapes.Length)];
-
             currentBlock = new TetrisBlock(newShape);
         }
 

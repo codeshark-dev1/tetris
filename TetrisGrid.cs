@@ -62,9 +62,20 @@ class TetrisGrid
             if (rowIsFull)
             {
                 //add score
-                for (int j = 0; j < Width; j++)
+                ClearRows(i);
+            }
+        }
+    }
+
+    private void ClearRows(int rowHeight)
+    {
+        for (int i = rowHeight; i > 0; i--)
+        {
+            for (int j = 0; j < Width; j++)
+            {
+                if (i - 1 > 0)
                 {
-                    cells[j,i] = Color.White;
+                    cells[j, i] = cells[j, i - 1];
                 }
             }
         }
