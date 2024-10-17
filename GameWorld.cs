@@ -19,9 +19,11 @@ class GameWorld
     public TetrisGrid grid;
 
     private BlockSpawner blockSpawner;
-    private TetrisBlock currentBlock;
+    private TetrisBlock currentBlock, nextBlock;
+    private Vector2 nextBlockPosition;
+
     private int currentXOffset = 0, currentYOffset = 0;
-    private float moveDelayY = 1f, currentMoveDelayY, moveDelayX = 0.1f, currentMoveDelayX;
+    private float moveDelayY = 0.9f, currentMoveDelayY, moveDelayMultiplier = 0.8f, moveDelayX = 0.075f, currentMoveDelayX;
 
     public GameWorld()
     {
@@ -32,6 +34,8 @@ class GameWorld
 
         grid = new TetrisGrid();
         blockSpawner = new BlockSpawner();
+
+        nextBlockPosition = new Vector2(grid.screenWidth * 0.65f, grid.screenHeight * 0.1f);
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
@@ -42,10 +46,10 @@ class GameWorld
     {
         KeyboardState keyboardState = Keyboard.GetState();
 
-        blockSpawner.Update(gameTime);
         currentBlock = blockSpawner.GetNewBlock();
+        nextBlock = blockSpawner.GetNextBlock();
 
-        if (currentMoveDelayY <= 0 || (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentMoveDelayY * 0.8f <= 0) && currentBlock != null)
+        if (currentMoveDelayY <= 0 || (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentMoveDelayY * moveDelayMultiplier <= 0) && currentBlock != null)
         {
             if (!CheckBlockCollision(currentXOffset, currentYOffset + 1))
             {
@@ -113,6 +117,11 @@ class GameWorld
             DrawCurrentBlock(spriteBatch, currentBlock);
         }
 
+        if (nextBlock != null)
+        {
+            DrawNextBlock(spriteBatch, nextBlock);
+        }
+
         spriteBatch.End();
     }
 
@@ -125,7 +134,7 @@ class GameWorld
                 if (block.shape[i, j])
                 {
                     int blockX = j * grid.cellWidth + (currentXOffset * grid.cellWidth);
-                    int blockY = i * grid.cellHeight + (currentYOffset * grid.cellWidth);
+                    int blockY = i * grid.cellHeight + (currentYOffset * grid.cellHeight);
 
                     spriteBatch.Draw(grid.emptyCell, new Rectangle(blockX, blockY, grid.cellWidth, grid.cellHeight), block.color);
                 }
@@ -182,6 +191,23 @@ class GameWorld
         }
 
         currentBlock = null;
+    }
+
+    private void DrawNextBlock(SpriteBatch spriteBatch, TetrisBlock block)
+    {
+        for (int i = 0; i < block.shape.GetLength(0); i++)
+        {
+            for (int j = 0; j < block.shape.GetLength(1); j++)
+            {
+                if (block.shape[i, j])
+                {
+                    int blockX = (int)nextBlockPosition.X + j * grid.cellWidth;
+                    int blockY = (int)nextBlockPosition.Y + i * grid.cellHeight;
+
+                    spriteBatch.Draw(grid.emptyCell, new Rectangle(blockX, blockY, grid.cellWidth, grid.cellHeight), block.color);
+                }
+            }
+        }
     }
 
     public void Reset()

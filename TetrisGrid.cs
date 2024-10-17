@@ -62,12 +62,12 @@ class TetrisGrid
             if (rowIsFull)
             {
                 //add score
-                ClearRows(i);
+                ClearCompletedRows(i);
             }
         }
     }
 
-    private void ClearRows(int rowHeight)
+    private void ClearCompletedRows(int rowHeight)
     {
         for (int i = rowHeight; i > 0; i--)
         {
