@@ -8,15 +8,15 @@ namespace TetrisTemplate
 {
     class BlockSpawner
     {
+        public GameWorld gameWorld;
+        public TetrisGrid grid;
+
         private TetrisBlock currentBlock, nextBlock;
-
-
 
         private string[] possibleShapes = { "O", "I", "S", "Z", "L", "J", "T" };
 
         public BlockSpawner()
         {
-            SpawnBlock();
         }
 
         public void SpawnBlock()
@@ -24,16 +24,17 @@ namespace TetrisTemplate
             var rand = new Random();
             string newShape = possibleShapes[rand.Next(possibleShapes.Length)];
 
-            if (nextBlock != null)
-            {
-                currentBlock = nextBlock;
-                nextBlock = new TetrisBlock(newShape);
-            }
-            else
+            if (nextBlock == null)
             {
                 nextBlock = new TetrisBlock(newShape);
                 SpawnBlock();
             }
+            
+            currentBlock = nextBlock;
+            nextBlock = new TetrisBlock(newShape);
+
+            int spawnY = -currentBlock.currentShapeOffset;
+            gameWorld.SetSpawnPosition(spawnY);
         }
 
         public TetrisBlock GetNewBlock()
@@ -44,6 +45,12 @@ namespace TetrisTemplate
         public TetrisBlock GetNextBlock()
         {
             return nextBlock;
+        }
+
+        public void Reset()
+        {
+            currentBlock = null;
+            nextBlock = null;
         }
     }
 }

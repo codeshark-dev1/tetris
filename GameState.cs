@@ -2,50 +2,32 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection.Metadata;
-
 
 namespace TetrisTemplate
 {
     class GameState
     {
         public SpriteFont font;
-        public SpriteBatch spriteBatch;
 
-        
-        public int gameState = 2;
-
-        public void CheckState(int gState)
+        public enum state
         {
-            if (gState == 0)
-            {
-                
-            }
-            else if (gState == 1)
-            {
-                 
-            }
-            else
+            Playing, GameOver
+        }
+
+        public state currentState = state.Playing;
+
+        public void CheckState(SpriteBatch spriteBatch)
+        {
+            if (currentState == state.GameOver)
             {
                 spriteBatch.DrawString(font, "Game Over", new Vector2(800 / 2 - font.MeasureString("Game Over").X / 2, 800 / 2), Color.Black);
-                spriteBatch.DrawString(font, "\nPress spacebar to return to menu", new Vector2(800 / 2 - font.MeasureString("\nPress spacebar to return to menu").X / 2, 800 / 2), Color.Black);
-                KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.Space))
-                {
-                    gameState = 0;
-                }
+                spriteBatch.DrawString(font, "\nPress spacebar to play again!", new Vector2(800 / 2 - font.MeasureString("\nPress spacebar to play again!").X / 2, 800 / 2), Color.Black);
             }
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            CheckState(gameState);
-            spriteBatch.End();
+            CheckState(spriteBatch);
         }
     }
 }

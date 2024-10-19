@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection.Metadata;
 
 namespace TetrisTemplate
 {
@@ -13,39 +8,55 @@ namespace TetrisTemplate
     {
         public SpriteFont font;
         public SpriteBatch spriteBatch;
-        GameWorld gameWorld;
 
         //constants
-        public static int blockScore = 50;
-        public static int lineScore = 500;
+        public const int blockScore = 10;
+        public const int lineScore = 100;
 
         //variables
-        public static int score = 0;
-        public static int level = 1;
-        public static int levelGoal = 500;
+        private int currentScore = 0;
+        private int level = 1;
+        private int levelGoal = 100;
 
-        public void checkLevelUp()
+        public bool CheckLevelUp()
         {
-            if (score >= levelGoal)
+            if (currentScore >= levelGoal)
             {
                 levelGoal *= 2;
-                GameWorld.moveDelayY *= 0.9f;
-                level += 1;
+                level++;
+                return true;
             }
+
+            return false;
         }
 
-        public void GameScore()
+        private void DrawGameScore(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(font, $"level: {level}", new Vector2(800 - 10 - font.MeasureString($"level: {level}").X, 10), Color.Black);
             spriteBatch.DrawString(font, $"next level: {levelGoal}", new Vector2(800 - 10 - font.MeasureString($"next level: {levelGoal}").X, 30), Color.Black);
-            spriteBatch.DrawString(font, $"score: {score}", new Vector2(800 - 10 - font.MeasureString($"score: {score}").X, 50), Color.Black);
+            spriteBatch.DrawString(font, $"score: {currentScore}", new Vector2(800 - 10 - font.MeasureString($"score: {currentScore}").X, 50), Color.Black);
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            GameScore();
-            spriteBatch.End();
+            DrawGameScore(spriteBatch);
+        }
+
+        public void IncreaseBlockScore()
+        {
+            currentScore += blockScore;
+        }
+
+        public void IncreaseLineScore()
+        {
+            currentScore += lineScore;
+        }
+
+        public void Reset()
+        {
+            currentScore = 0;
+            level = 1;
+            levelGoal = 100;
         }
     }
 }

@@ -1,41 +1,49 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using TetrisTemplate;
+using static TetrisTemplate.GameState;
 
 class GameWorld
 {
-    enum GameState
-    {
-        Playing,
-        GameOver
-    }
     public static Random Random { get { return random; } }
     static Random random;
 
-    SpriteFont font;
-    GameState gameState;
+    private SpriteFont font;
     public TetrisGrid grid;
+    private Score score;
+    private GameState gameState;
 
     private BlockSpawner blockSpawner;
     private TetrisBlock currentBlock, nextBlock;
     private Vector2 nextBlockPosition;
 
     private int currentXOffset = 0, currentYOffset = 0;
-    private float currentMoveDelayY, moveDelayX = 0.075f, moveDelayMultiplier = 0.8f, currentMoveDelayX;
-    public static float moveDelayY = 0.9f;
+    private float currentMoveDelayY, moveDelayX = 0.075f, moveDelayMultiplier = 0.8f, currentMoveDelayX, startMoveDelayY = 1f, moveDelayY, minMoveDelayY = 0.75f, currentPlayerMoveDelay;
 
     public GameWorld()
     {
         random = new Random();
-        gameState = GameState.Playing;
 
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
 
-
+        score = new Score();
         grid = new TetrisGrid();
+
         blockSpawner = new BlockSpawner();
+        blockSpawner.gameWorld = this;
+        blockSpawner.grid = grid;
+        blockSpawner.SpawnBlock();
+
+        gameState = new GameState();
+        grid.score = score;
+
+        score.font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
+        gameState.font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
+
+        moveDelayY = startMoveDelayY;
 
         nextBlockPosition = new Vector2(grid.screenWidth * 0.65f, grid.screenHeight * 0.1f);
     }
@@ -48,26 +56,37 @@ class GameWorld
     {
         KeyboardState keyboardState = Keyboard.GetState();
 
+        if (keyboardState.IsKeyDown(Keys.Space) && gameState.currentState == GameState.state.GameOver)
+        {
+            Reset();
+        }
+
+        if (gameState.currentState == GameState.state.GameOver)
+        {
+            return;
+        }
+
         currentBlock = blockSpawner.GetNewBlock();
         nextBlock = blockSpawner.GetNextBlock();
 
-        if (currentMoveDelayY <= 0 || (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentMoveDelayY * moveDelayMultiplier <= 0) && currentBlock != null)
+        if (currentMoveDelayY <= 0 || (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S) && currentPlayerMoveDelay <= 0) && currentBlock != null)
         {
             if (!CheckBlockCollision(currentXOffset, currentYOffset + 1))
             {
                 currentYOffset++;
                 currentMoveDelayY = moveDelayY;
+                currentPlayerMoveDelay = startMoveDelayY * 0.75f;
             }
             else
             {
-                Score.score += Score.blockScore;
+                score.IncreaseBlockScore();
                 LockBlock();
+                currentMoveDelayY = moveDelayY;
                 blockSpawner.SpawnBlock();
-                currentYOffset = 0;
             }
         }
 
-        if (keyboardState.IsKeyDown(Keys.R) && currentBlock != null)
+        if ((keyboardState.IsKeyDown(Keys.R) || keyboardState.IsKeyDown(Keys.Up)) && currentBlock != null)
         {
             bool[,] newShape = currentBlock.GetNextRotation();
             if (!CheckBlockCollision(currentXOffset, currentYOffset, newShape))
@@ -87,7 +106,6 @@ class GameWorld
         {
             currentMoveDelayY = moveDelayY;
             currentMoveDelayX = moveDelayX;
-            currentXOffset = 0;
         }
 
         if ((keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && currentMoveDelayX <= 0 && currentBlock != null)
@@ -107,6 +125,11 @@ class GameWorld
                 currentXOffset++;
             }
         }
+
+        if (score.CheckLevelUp())
+        {
+            IncreaseDifficulty();
+        }
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -114,6 +137,8 @@ class GameWorld
         spriteBatch.Begin();
 
         grid.Draw(gameTime, spriteBatch);
+        score.Draw(spriteBatch);
+        gameState.Draw(spriteBatch);
 
         if (currentBlock != null) 
         {
@@ -185,7 +210,11 @@ class GameWorld
                     int gridX = currentXOffset + j;
                     int gridY = currentYOffset + i;
 
-                    if (gridX >= 0 && gridX < grid.Width && gridY < grid.Height)
+                    if (gridY <= 0)
+                    {
+                        gameState.currentState = GameState.state.GameOver;
+                    }
+                    else if (gridX >= 0 && gridX < grid.Width && gridY < grid.Height)
                     {
                         grid.cells[gridX, gridY] = currentBlock.color;
                     }
@@ -213,8 +242,32 @@ class GameWorld
         }
     }
 
+    private void IncreaseDifficulty()
+    {
+        if (moveDelayY - 0.02f > minMoveDelayY)
+        {
+            moveDelayY -= 0.02f;
+        }
+    }
+
+    public void SetSpawnPosition(int y)
+    {
+        currentYOffset = y;
+    }
+
     public void Reset()
     {
+        currentMoveDelayX = 0;
+        currentMoveDelayY = 0;
+        moveDelayY = startMoveDelayY;
+        currentXOffset = 0;
+        currentYOffset = 0;
+        currentPlayerMoveDelay = 0;
+        currentBlock = null;
+        nextBlock = null;
+        blockSpawner.Reset();
+        grid.Clear();
 
+        gameState.currentState = GameState.state.Playing;
     }
 }

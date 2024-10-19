@@ -8,11 +8,12 @@ namespace TetrisTemplate
 {
     class TetrisBlock
     {
-        public bool[,] shape = new bool[4,4];
+        public bool[,] shape = new bool[4, 4];
         public string currentShape = "O";
 
+        private int[] shapeOffsets = { 2, 0, 1, 1, 2, 2, 2 };
+        public int currentShapeOffset;
         private int currentRotation = 0;
-
 
         #region shapes
 
@@ -192,44 +193,50 @@ namespace TetrisTemplate
 
         public void Initialize()
         {
-            switch (currentShape) 
+            switch (currentShape)
             {
                 case "O":
                     shape = OShape[0];
                     color = Color.Yellow;
+                    currentShapeOffset = shapeOffsets[0];
                     break;
                 case "I":
                     shape = IShape[0];
                     color = Color.Cyan;
+                    currentShapeOffset = shapeOffsets[1];
                     break;
                 case "S":
                     shape = SShape[0];
                     color = Color.Coral;
+                    currentShapeOffset = shapeOffsets[4];
                     break;
                 case "Z":
                     shape = ZShape[0];
                     color = Color.Green;
+                    currentShapeOffset = shapeOffsets[5];
                     break;
                 case "L":
                     shape = LShape[0];
                     color = Color.Orange;
+                    currentShapeOffset = shapeOffsets[3];
                     break;
                 case "J":
                     shape = JShape[0];
                     color = Color.Pink;
+                    currentShapeOffset = shapeOffsets[2];
                     break;
                 case "T":
                     shape = TShape[0];
                     color = Color.Purple;
+                    currentShapeOffset = shapeOffsets[6];
                     break;
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            //TODO: do input using InputHelper
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.R) && currentRotationDelay <= 0)
+            if ((keyboardState.IsKeyDown(Keys.R) || keyboardState.IsKeyDown(Keys.Up)) && currentRotationDelay <= 0)
             {
                 currentRotationDelay = rotationDelay;
             }

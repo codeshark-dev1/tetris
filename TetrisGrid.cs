@@ -16,6 +16,8 @@ class TetrisGrid
 
     public List<TetrisBlock> currentBlocks = new List<TetrisBlock>();
 
+    public Score score;
+
     public TetrisGrid()
     {
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
@@ -61,7 +63,7 @@ class TetrisGrid
 
             if (rowIsFull)
             {
-                Score.score += Score.lineScore;
+                score.IncreaseLineScore();
                 ClearCompletedRows(i);
             }
         }

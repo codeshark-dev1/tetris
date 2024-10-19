@@ -43,15 +43,6 @@ class TetrisGame : Game
         spriteBatch = new SpriteBatch(GraphicsDevice);
 
         gameWorld = new GameWorld();
-        gameWorld.Reset();
-
-        score = new Score();
-        gameState = new GameState();
-        score.spriteBatch = new SpriteBatch(GraphicsDevice);
-        score.font = ContentManager.Load<SpriteFont>("SpelFont");
-        gameState.spriteBatch = new SpriteBatch(GraphicsDevice);
-        gameState.font = ContentManager.Load<SpriteFont>("SpelFont");
-
 
     }
 
@@ -60,15 +51,12 @@ class TetrisGame : Game
         inputHelper.Update(gameTime);
         gameWorld.HandleInput(gameTime, inputHelper);
         gameWorld.Update(gameTime);
-        score.checkLevelUp();
     }
 
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.White);
         gameWorld.Draw(gameTime, spriteBatch);
-        score.Draw();
-        gameState.Draw();
     }
 }
 
