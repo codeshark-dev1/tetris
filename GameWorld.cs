@@ -252,6 +252,7 @@ class GameWorld
 
     public void SetSpawnPosition(int y)
     {
+        currentXOffset = 0;
         currentYOffset = y;
     }
 
