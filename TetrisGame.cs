@@ -10,6 +10,7 @@ class TetrisGame : Game
     private InputHelper inputHelper;
     private GameWorld gameWorld;
     private Score score;
+    private GameState gameState;
 
     public static ContentManager ContentManager { get; private set; }
     
@@ -45,8 +46,11 @@ class TetrisGame : Game
         gameWorld.Reset();
 
         score = new Score();
+        gameState = new GameState();
         score.spriteBatch = new SpriteBatch(GraphicsDevice);
         score.font = ContentManager.Load<SpriteFont>("SpelFont");
+        gameState.spriteBatch = new SpriteBatch(GraphicsDevice);
+        gameState.font = ContentManager.Load<SpriteFont>("SpelFont");
 
 
     }
@@ -64,6 +68,7 @@ class TetrisGame : Game
         GraphicsDevice.Clear(Color.White);
         gameWorld.Draw(gameTime, spriteBatch);
         score.Draw();
+        gameState.Draw();
     }
 }
 
