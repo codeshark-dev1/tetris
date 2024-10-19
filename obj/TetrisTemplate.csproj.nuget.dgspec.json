@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\TetrisTemplate.csproj": {}
+    "C:\\Users\\wfmai\\Desktop\\tetris\\tetris-main\\TetrisTemplate.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\TetrisTemplate.csproj": {
+    "C:\\Users\\wfmai\\Desktop\\tetris\\tetris-main\\TetrisTemplate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\TetrisTemplate.csproj",
+        "projectUniqueName": "C:\\Users\\wfmai\\Desktop\\tetris\\tetris-main\\TetrisTemplate.csproj",
         "projectName": "TetrisTemplate",
-        "projectPath": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\TetrisTemplate.csproj",
-        "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\obj\\",
+        "projectPath": "C:\\Users\\wfmai\\Desktop\\tetris\\tetris-main\\TetrisTemplate.csproj",
+        "packagesPath": "C:\\Users\\wfmai\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wfmai\\Desktop\\tetris\\tetris-main\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wfmai\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,12 +69,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.33, 6.0.33]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.33, 6.0.33]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.33, 6.0.33]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.33, 6.0.33]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

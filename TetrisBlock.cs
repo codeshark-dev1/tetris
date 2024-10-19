@@ -13,6 +13,7 @@ namespace TetrisTemplate
 
         private int currentRotation = 0;
 
+
         #region shapes
 
         private bool[][,] OShape = new bool[1][,]

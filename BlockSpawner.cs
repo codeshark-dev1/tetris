@@ -10,6 +10,8 @@ namespace TetrisTemplate
     {
         private TetrisBlock currentBlock, nextBlock;
 
+
+
         private string[] possibleShapes = { "O", "I", "S", "Z", "L", "J", "T" };
 
         public BlockSpawner()

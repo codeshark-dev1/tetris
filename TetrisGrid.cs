@@ -61,7 +61,7 @@ class TetrisGrid
 
             if (rowIsFull)
             {
-                //add score
+                Score.score += Score.lineScore;
                 ClearCompletedRows(i);
             }
         }

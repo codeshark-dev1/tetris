@@ -23,7 +23,8 @@ class GameWorld
     private Vector2 nextBlockPosition;
 
     private int currentXOffset = 0, currentYOffset = 0;
-    private float moveDelayY = 0.9f, currentMoveDelayY, moveDelayMultiplier = 0.8f, moveDelayX = 0.075f, currentMoveDelayX;
+    private float currentMoveDelayY, moveDelayX = 0.075f, moveDelayMultiplier = 0.8f, currentMoveDelayX;
+    public static float moveDelayY = 0.9f;
 
     public GameWorld()
     {
@@ -31,6 +32,7 @@ class GameWorld
         gameState = GameState.Playing;
 
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
+
 
         grid = new TetrisGrid();
         blockSpawner = new BlockSpawner();
@@ -58,6 +60,7 @@ class GameWorld
             }
             else
             {
+                Score.score += Score.blockScore;
                 LockBlock();
                 blockSpawner.SpawnBlock();
                 currentYOffset = 0;
