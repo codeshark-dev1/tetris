@@ -27,6 +27,10 @@ class GameWorld
 
     private SoundEffect lockSound, gameOverSound;
 
+    private bool screenIsShaking = false;
+    private Vector2 shakeAmount = new Vector2(3, 1);
+    private int currentShakeAmount, maxShakes = 3;
+
     public GameWorld()
     {
         random = new Random();
@@ -73,6 +77,17 @@ class GameWorld
         if (keyboardState.IsKeyDown(Keys.Space) && gameState.currentState == GameState.state.GameOver)
         {
             Reset();
+        }
+
+        if (screenIsShaking && currentShakeAmount < maxShakes)
+        {
+            shakeAmount *= -1;
+            currentShakeAmount++;
+        }
+        else
+        {
+            currentShakeAmount = 0;
+            screenIsShaking = false;
         }
 
         if (gameState.currentState == GameState.state.GameOver)
@@ -137,7 +152,15 @@ class GameWorld
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Begin();
+        if (screenIsShaking)
+        {
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Matrix.CreateTranslation(shakeAmount.X, shakeAmount.Y, 0));
+        }
+        else
+        {
+            spriteBatch.Begin();
+        }
+        
 
         grid.Draw(gameTime, spriteBatch);
         score.Draw(spriteBatch);
@@ -153,6 +176,7 @@ class GameWorld
             spriteBatch.DrawString(font, "next block", new Vector2(grid.screenWidth - 10 - font.MeasureString("next block").X, grid.screenHeight * 0.4f), Color.Black);
             DrawNextBlock(spriteBatch, nextBlock);
         }
+
         spriteBatch.End();
     }
 
@@ -204,6 +228,7 @@ class GameWorld
 
     private void LockBlock()
     {
+        screenIsShaking = true;
         for (int i = 0; i < currentBlock.shape.GetLength(0); i++)
         {
             for (int j = 0; j < currentBlock.shape.GetLength(1); j++)
@@ -215,6 +240,8 @@ class GameWorld
 
                     if (gridY <= 0)
                     {
+                        maxShakes = 6;
+                        screenIsShaking = true;
                         gameOverSound.Play();
                         gameState.currentState = GameState.state.GameOver;
                     }
@@ -271,6 +298,8 @@ class GameWorld
         currentPlayerMoveDelay = 0;
         currentBlock = null;
         nextBlock = null;
+        screenIsShaking = false;
+        maxShakes = 3;
         blockSpawner.Reset();
         grid.Clear();
         score.Reset();
