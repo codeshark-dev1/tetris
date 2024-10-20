@@ -108,9 +108,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\TetrisTemplate.csproj",
-      "projectName": "TetrisTemplate",
-      "projectPath": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\TetrisTemplate.csproj",
+      "projectUniqueName": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\Tetris.csproj",
+      "projectName": "Tetris",
+      "projectPath": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\Tetris.csproj",
       "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\lukas\\source\\repos\\Tetris - Code template\\Tetris - Code template\\TetrisTemplate\\obj\\",
       "projectStyle": "PackageReference",

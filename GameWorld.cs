@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TetrisTemplate;
-using static TetrisTemplate.GameState;
+using System.Reflection.Emit;
+using Tetris;
+using static Tetris.GameState;
 
 class GameWorld
 {
@@ -21,7 +22,7 @@ class GameWorld
     private Vector2 nextBlockPosition;
 
     private int currentXOffset = 0, currentYOffset = 0;
-    private float currentMoveDelayY, moveDelayX = 0.075f, moveDelayMultiplier = 0.8f, currentMoveDelayX, startMoveDelayY = 1f, moveDelayY, minMoveDelayY = 0.75f, currentPlayerMoveDelay;
+    private float currentMoveDelayY, moveDelayX = 0.075f, currentMoveDelayX, startMoveDelayY = 1f, moveDelayY, minMoveDelayY = 0.75f, currentPlayerMoveDelay;
 
     public GameWorld()
     {
@@ -45,11 +46,19 @@ class GameWorld
 
         moveDelayY = startMoveDelayY;
 
-        nextBlockPosition = new Vector2(grid.screenWidth * 0.65f, grid.screenHeight * 0.1f);
+        nextBlockPosition = new Vector2(670, grid.screenHeight * 0.2f);
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
+        if ((inputHelper.KeyPressed(Keys.R) || inputHelper.KeyPressed(Keys.Up)) && currentBlock != null)
+        {
+            bool[,] newShape = currentBlock.GetNextRotation();
+            if (!CheckBlockCollision(currentXOffset, currentYOffset, newShape))
+            {
+                currentBlock.Rotate();
+            }
+        }
     }
 
     public void Update(GameTime gameTime)
@@ -86,19 +95,8 @@ class GameWorld
             }
         }
 
-        if ((keyboardState.IsKeyDown(Keys.R) || keyboardState.IsKeyDown(Keys.Up)) && currentBlock != null)
-        {
-            bool[,] newShape = currentBlock.GetNextRotation();
-            if (!CheckBlockCollision(currentXOffset, currentYOffset, newShape))
-            {
-                currentBlock.Rotate();
-            }
-        }
-
         if (currentBlock != null)
         {
-            currentBlock.Update(gameTime);
-
             currentMoveDelayY -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             currentMoveDelayX -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
@@ -147,9 +145,9 @@ class GameWorld
 
         if (nextBlock != null)
         {
+            spriteBatch.DrawString(font, "next block", new Vector2(grid.screenWidth - 10 - font.MeasureString("next block").X, grid.screenHeight * 0.4f), Color.Black);
             DrawNextBlock(spriteBatch, nextBlock);
         }
-
         spriteBatch.End();
     }
 
@@ -268,7 +266,8 @@ class GameWorld
         nextBlock = null;
         blockSpawner.Reset();
         grid.Clear();
-
+        score.Reset();
+        blockSpawner.SpawnBlock();
         gameState.currentState = GameState.state.Playing;
     }
 }

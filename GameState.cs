@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace TetrisTemplate
+namespace Tetris
 {
     class GameState
     {
@@ -20,8 +20,8 @@ namespace TetrisTemplate
         {
             if (currentState == state.GameOver)
             {
-                spriteBatch.DrawString(font, "Game Over", new Vector2(800 / 2 - font.MeasureString("Game Over").X / 2, 800 / 2), Color.Black);
-                spriteBatch.DrawString(font, "\nPress spacebar to play again!", new Vector2(800 / 2 - font.MeasureString("\nPress spacebar to play again!").X / 2, 800 / 2), Color.Black);
+                spriteBatch.DrawString(font, "Game Over", new Vector2(600 - font.MeasureString("Game Over").X / 2, 800 / 2), Color.Black);
+                spriteBatch.DrawString(font, "\nPress spacebar to play again!", new Vector2(600 - font.MeasureString("\nPress spacebar to play again!").X / 2, 800 / 2), Color.Black);
             }
         }
 

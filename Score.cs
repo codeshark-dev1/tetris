@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 
-namespace TetrisTemplate
+namespace Tetris
 {
     class Score
     {

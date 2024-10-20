@@ -4,7 +4,7 @@ using Microsoft.Win32.SafeHandles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace TetrisTemplate
+namespace Tetris
 {
     class TetrisBlock
     {
@@ -233,16 +233,6 @@ namespace TetrisTemplate
             }
         }
 
-        public void Update(GameTime gameTime)
-        {
-            KeyboardState keyboardState = Keyboard.GetState();
-            if ((keyboardState.IsKeyDown(Keys.R) || keyboardState.IsKeyDown(Keys.Up)) && currentRotationDelay <= 0)
-            {
-                currentRotationDelay = rotationDelay;
-            }
-
-            currentRotationDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-        }
         public bool[,] GetNextRotation()
         {
             if (currentShape == "O")
