@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Game Over Sound.wav</SourceFile>
   <SourceTime>2024-10-20T14:21:59.2766847+02:00</SourceTime>
   <DestFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/bin/DesktopGL/Content/Game Over Sound.xnb</DestFile>
-  <DestTime>2024-10-20T14:37:01.667784+02:00</DestTime>
+  <DestTime>2024-10-20T15:04:11.441507+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

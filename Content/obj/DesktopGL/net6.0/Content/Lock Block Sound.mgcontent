@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Lock Block Sound.wav</SourceFile>
   <SourceTime>2024-10-20T14:26:19.6564256+02:00</SourceTime>
   <DestFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/bin/DesktopGL/Content/Lock Block Sound.xnb</DestFile>
-  <DestTime>2024-10-20T14:28:55.7355534+02:00</DestTime>
+  <DestTime>2024-10-20T15:04:11.566901+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

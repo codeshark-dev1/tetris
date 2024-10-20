@@ -11,7 +11,7 @@ namespace Tetris
         private Song song;
         public SpriteFont font;
 
-        float fadeIncrement = 0.00075f;
+        float fadeIncrement = 0.00300f;
 
         public enum state
         {
@@ -23,7 +23,7 @@ namespace Tetris
         public GameState()
         {
             song = TetrisGame.ContentManager.Load<Song>("Running Errands - TrackTribe");
-            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Volume = 0.3f;
 
         }
 
@@ -45,7 +45,7 @@ namespace Tetris
             }
             else
             {
-                if (MediaPlayer.Volume <= 0.1)
+                if (MediaPlayer.Volume <= 0.3f)
                 {
                     MediaPlayer.Volume += fadeIncrement;
                 }

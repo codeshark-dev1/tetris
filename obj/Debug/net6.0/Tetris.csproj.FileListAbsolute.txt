@@ -26,6 +26,8 @@ C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\Tetris
 C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\obj\Debug\net6.0\Tetris.pdb
 C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\obj\Debug\net6.0\Tetris.genruntimeconfig.cache
 C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\obj\Debug\net6.0\ref\Tetris.dll
+C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\bin\Debug\net6.0\Content\Running Errands - TrackTribe.ogg
+C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\bin\Debug\net6.0\Content\Running Errands - TrackTribe.xnb
+C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\bin\Debug\net6.0\Content\Game Over Sound.xnb
 C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\bin\Debug\net6.0\Content\Lock Block Sound.xnb
 C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\bin\Debug\net6.0\Content\Row Clear Sound.xnb
-C:\Users\lukas\source\repos\Tetris - Code template\Tetris - Code template\TetrisTemplate\bin\Debug\net6.0\Content\Game Over Sound.xnb

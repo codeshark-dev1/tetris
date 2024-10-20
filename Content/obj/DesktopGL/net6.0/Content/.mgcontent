@@ -8,9 +8,11 @@
     <File>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Game Over Sound.wav</File>
     <File>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Lock Block Sound.wav</File>
     <File>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Row Clear Sound.wav</File>
+    <File>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Running Errands - TrackTribe.mp3</File>
     <File>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/SpelFont.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

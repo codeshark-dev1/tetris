@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><SourceFile>C:/Users/wfmai/Desktop/tetris/tetris-main/Content/Running Errands - TrackTribe.mp3</SourceFile><SourceTime>2024-10-20T14:24:20.9725386+02:00</SourceTime><DestFile>C:/Users/wfmai/Desktop/tetris/tetris-main/Content/bin/Windows/Running Errands - TrackTribe.xnb</DestFile><DestTime>2024-10-20T14:36:09.9488498+02:00</DestTime><Importer>Mp3Importer</Importer><ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime><Processor>SongProcessor</Processor><ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime><Parameters><Key>Quality</Key><Value>Best</Value></Parameters><Dependencies /><BuildAsset /><BuildOutput><string>C:/Users/wfmai/Desktop/tetris/tetris-main/Content/bin/Windows/Running Errands - TrackTribe.wma</string></BuildOutput></PipelineBuildEvent>
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Running Errands - TrackTribe.mp3</SourceFile>
+  <SourceTime>2024-10-20T15:03:16.7543954+02:00</SourceTime>
+  <DestFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/bin/Windows/Running Errands - TrackTribe.xnb</DestFile>
+  <DestTime>2024-10-20T15:04:04.6463893+02:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/bin/Windows/Running Errands - TrackTribe.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>
