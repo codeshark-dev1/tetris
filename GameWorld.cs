@@ -6,6 +6,7 @@ using System;
 using System.Reflection.Emit;
 using Tetris;
 using static Tetris.GameState;
+using Microsoft.Xna.Framework.Audio;
 
 class GameWorld
 {
@@ -24,11 +25,15 @@ class GameWorld
     private int currentXOffset = 0, currentYOffset = 0;
     private float currentMoveDelayY, moveDelayX = 0.075f, currentMoveDelayX, startMoveDelayY = 1f, moveDelayY, minMoveDelayY = 0.75f, currentPlayerMoveDelay;
 
+    private SoundEffect lockSound, gameOverSound;
+
     public GameWorld()
     {
         random = new Random();
 
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
+        lockSound = TetrisGame.ContentManager.Load<SoundEffect>("Lock Block Sound");
+        gameOverSound = TetrisGame.ContentManager.Load<SoundEffect>("Game Over Sound");
 
         score = new Score();
         grid = new TetrisGrid();
@@ -210,6 +215,7 @@ class GameWorld
 
                     if (gridY <= 0)
                     {
+                        gameOverSound.Play();
                         gameState.currentState = GameState.state.GameOver;
                     }
                     else if (gridX >= 0 && gridX < grid.Width && gridY < grid.Height)
@@ -220,6 +226,7 @@ class GameWorld
             }
         }
 
+        lockSound.Play();
         currentBlock = null;
     }
 

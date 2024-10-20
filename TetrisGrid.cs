@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Tetris;
+using Microsoft.Xna.Framework.Audio;
 
 class TetrisGrid
 {
@@ -18,9 +19,12 @@ class TetrisGrid
 
     public Score score;
 
+    private SoundEffect rowClearSound;
+
     public TetrisGrid()
     {
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
+        rowClearSound = TetrisGame.ContentManager.Load<SoundEffect>("Row Clear Sound");
         gridPosition = Vector2.Zero;
         Clear();
     }
@@ -81,5 +85,6 @@ class TetrisGrid
                 }
             }
         }
+        rowClearSound.Play();
     }
 }

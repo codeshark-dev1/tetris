@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/Row Clear Sound.wav</SourceFile>
+  <SourceTime>2024-10-20T14:23:35.0780727+02:00</SourceTime>
+  <DestFile>C:/Users/lukas/source/repos/Tetris - Code template/Tetris - Code template/TetrisTemplate/Content/bin/DesktopGL/Content/Row Clear Sound.xnb</DestFile>
+  <DestTime>2024-10-20T14:28:55.859401+02:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
